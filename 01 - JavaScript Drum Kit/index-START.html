@@ -58,9 +58,42 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
+<script defer>
+    console.log('lkhk')
 
-</script>
+    const elemKeys = document.querySelectorAll('.key');
+    //console.log('elemKeys ', elemKeys)
+
+
+
+    window.addEventListener('keydown', (evt) => {
+      console.log('evt', evt)
+
+      elemKeys.forEach((elemKey) => {
+        console.log('elemKey.dataset.key ', elemKey.dataset.key)
+        console.log('evt.keyCode ', evt.keyCode)
+
+        if (elemKey.dataset.key == evt.keyCode) {
+          console.log('зашли в  if')
+          elemKey.classList.add('playing')
+
+          const audioElems = document.querySelectorAll('audio');   // [ <audio>, <audio>, <audio>]
+          console.log('audioElems ', audioElems)
+
+          audioElems.forEach((audioElem) => {
+            if (audioElem.dataset.key == evt.keyCode) {
+              audioElem.play()
+            }
+          });
+        }
+        else {
+          elemKey.classList.remove('playing')
+        }
+      });
+    }
+    );
+
+  </script>
 
 
 </body>
