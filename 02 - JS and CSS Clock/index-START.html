@@ -63,13 +63,54 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
-
-  </style>
 
   <script>
 
+    const hoursElem = document.querySelector('.hour-hand');
+    const minutesElem = document.querySelector('.min-hand');
+    const secondsElem = document.querySelector('.second-hand');
+
+    const getDate = () => {
+
+      const dateNow = new Date();
+
+      console.log(dateNow);
+      // console.dir(dateNow)
+
+      const hour = dateNow.getHours();
+      const minute = dateNow.getMinutes();
+      const second = dateNow.getSeconds();
+
+      console.log('hours ', hour);
+      console.log('minutes ', minute);
+      console.log('seconds ', second);
+
+      const hoursDegrees = ((hour / 12) * 360) + ((minute / 60) * 30) + 90;
+      console.log('hoursDegrees ', hoursDegrees)
+
+      const minuteDegrees = ((minute / 60) * 360) + ((second / 60) * 6) + 90;
+      console.log('minuteDegrees ', minuteDegrees)
+
+      const secondDegrees = ((second / 60) * 360) + 90;
+      console.log('secondDegrees  ', secondDegrees)
+
+
+      hoursElem.style.transform = `rotate(${hoursDegrees}deg)`;
+      minutesElem.style.transform = `rotate(${minuteDegrees}deg)`;
+      secondsElem.style.transform = `rotate(${secondDegrees}deg)`;
+    }
+
+
+    setInterval(getDate, 1000); // через каждую сек будет вызыватьс фукнция getDate
+
+    getDate()
 
   </script>
+
 </body>
 </html>
