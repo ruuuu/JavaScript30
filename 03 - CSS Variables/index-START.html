@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Scoped CSS Variables and JS</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
   <div class="controls">
     <label for="spacing">Spacing:</label>
+    <!-- добавили дата-атибут data-sizing: -->
     <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
 
+
     <label for="blur">Blur:</label>
+    <!-- добавили дата-атибут data-sizing: -->
     <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
 
     <label for="base">Base Color</label>
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img
+    src="https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRZcmlaOZxV_nbS5cWjzzCB1i3PnTRqawOv0-EzUWZ15gTTCyaua_Ngv5hutODmYy7y">
 
   <style>
-
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -43,10 +49,55 @@
     input {
       width: 100px;
     }
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
   </style>
 
+
+
   <script>
+    const inputSpacing = document.querySelector('input#spacing');
+    console.log(inputSpacing)
+
+    const inputBlur = document.querySelector('input#blur');
+    console.log('inputBlur ', inputBlur)
+
+    const inputColor = document.querySelector('input#base');
+    console.log('inputColor ', inputColor)
+
+    const img = document.querySelector('img');
+
+    inputSpacing.addEventListener('change', () => {
+      console.log('меняем значение')
+
+      const valueSpacing = inputSpacing.value; // значение value получаем
+      inputSpacing.dataset.sizing = valueSpacing;
+      console.log('inputSpacing ', inputSpacing)
+      img.style.padding = `${inputSpacing.dataset.sizing}px`;
+    });
+
+
+
+    inputBlur.addEventListener('change', () => {
+      console.log('inputBlur меняем blur')
+      const valueBlur = inputBlur.value; // значение value получаем
+      inputBlur.dataset.sizing = valueBlur;
+      img.style.filter = `blur(${inputBlur.dataset.sizing}px)`;
+    });
+
+
+    inputColor.addEventListener('change', () => {
+      console.log('inputColor меняем color')
+      const valueColor = inputColor.value; // значение value получаем
+      console.log('valueColor ', valueColor)
+      img.style.backgroundColor = valueColor
+    });
+
   </script>
 
 </body>
+
 </html>
