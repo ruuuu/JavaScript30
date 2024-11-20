@@ -96,7 +96,27 @@
     }
 
     .panel.open {
+      flex-grow: 1;
+      flex-shrink: 1;
       font-size: 40px;
+    }
+
+    .panel p:nth-child(1) {
+      transform: translateY(-100%);
+    }
+
+
+    .panel p:nth-child(3) {
+      transform: translateY(100%);
+      color: green;
+    }
+
+    .open-active.p:nth-child(1) {
+      transform: translateY(0);
+    }
+
+    .open-active.p:nth-child(3) {
+      transform: translateY(0);
     }
   </style>
 
@@ -137,6 +157,8 @@
     const panelElems = document.querySelectorAll('.panel');
 
 
+
+
     panelElems.forEach((panelElem) => {
 
       panelElem.addEventListener('click', () => {
@@ -146,14 +168,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
-            flex-grow: 1;
+            justify-content: space-around; 
         `;
 
-        panelsElem.style.cssText = `
-            
-        `;
-
+        panelElem.classList.toggle('open-active');
 
 
       });
